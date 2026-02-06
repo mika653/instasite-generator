@@ -4,9 +4,11 @@ import { User, Mail, Phone, MessageSquare, MapPin, Clock, CheckCircle } from 'lu
 import { ModularBadge } from '../components/ModularBadge';
 import { CLINIC_INFO } from '../constants';
 import { useGenerator } from '../context/GeneratorContext';
+import { getSiteCopy } from '../utils/getSiteCopy';
 
 const Contact = () => {
   const { data } = useGenerator();
+  const copy = getSiteCopy(data.profession);
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
 
@@ -33,7 +35,7 @@ const Contact = () => {
       <ModularBadge label="Contact Module" />
       <h1 className="text-3xl sm:text-5xl font-bold mb-6">Get in Touch</h1>
       <p className="text-xl text-stone-500 mb-16 max-w-2xl">
-        Have a question or want to schedule a visit? Fill out the form below and our team will respond promptly.
+        {copy.contactSubtitle}
       </p>
 
       <div className="grid md:grid-cols-3 gap-16">

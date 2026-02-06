@@ -2,14 +2,15 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, MapPin, Phone, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SERVICES, CLINIC_INFO } from '../constants';
+import { CLINIC_INFO } from '../constants';
 import { ModularBadge } from '../components/ModularBadge';
 import { useGenerator } from '../context/GeneratorContext';
+import { getSiteCopy } from '../utils/getSiteCopy';
 
 const Home = () => {
   const { data } = useGenerator();
+  const copy = getSiteCopy(data.profession);
   const heroImage = data.photoUrl || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800';
-  const profession = data.profession || 'internal medicine';
   const cityLabel = data.city || 'Metro Manila';
   const practiceName = data.practiceName || CLINIC_INFO.name;
   const phoneNumber = data.phone || CLINIC_INFO.phone;
@@ -23,18 +24,17 @@ const Home = () => {
             <div>
               <ModularBadge label="Hero Section Module" />
               <h1 className="text-4xl lg:text-7xl font-bold text-stone-900 leading-[1.1] mb-6">
-                Trusted {profession.toLowerCase()}, built on <span className="italic serif">compassion</span>.
+                {copy.heroHeadline} <span className="italic serif">{copy.heroValue}</span>.
               </h1>
               <p className="text-lg text-stone-500 mb-10 leading-relaxed max-w-xl">
-                {data.name} provides patient-centric {profession.toLowerCase()} in {cityLabel}.
-                Professional care you can trust.
+                {copy.heroDescription(data.name, cityLabel)}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   to="/contact"
                   className="bg-salmon-500 text-white px-8 py-4 rounded-full font-medium hover:bg-salmon-600 transition-all text-center flex items-center justify-center gap-2 group"
                 >
-                  Contact the Clinic
+                  Get in Touch
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
@@ -64,7 +64,7 @@ const Home = () => {
         <ModularBadge label="Services Module" />
         <h2 className="text-4xl font-bold mb-12">Services</h2>
         <div className="space-y-8">
-          {SERVICES.map((service) => (
+          {copy.services.map((service) => (
             <div key={service.id} className="flex gap-6 items-start p-6 rounded-2xl hover:bg-stone-50 transition-all">
               <div className="w-10 h-10 bg-salmon-50 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
                 <CheckCircle2 size={22} className="text-salmon-500" />
@@ -78,11 +78,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CLINIC INFO */}
+      {/* LOCATION INFO */}
       <section className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ModularBadge label="Clinic Info Module" />
-          <h2 className="text-4xl font-bold mb-12">Visit Our Clinic</h2>
+          <ModularBadge label="Location Module" />
+          <h2 className="text-4xl font-bold mb-12">{copy.locationLabel}</h2>
           <div className="bg-white rounded-3xl p-10 luxury-shadow border border-stone-100 max-w-2xl">
             <h3 className="serif text-2xl font-bold mb-8 text-stone-900">{practiceName}</h3>
             <div className="space-y-6">
@@ -121,9 +121,9 @@ const Home = () => {
       {/* CTA */}
       <section className="py-20 bg-gradient-to-br from-salmon-600 to-salmon-800 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-8">Ready to book your visit?</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-8">{copy.ctaHeading}</h2>
           <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-            Get in touch with our clinic today. We're here to help with your needs.
+            {copy.ctaDescription}
           </p>
           <Link to="/contact" className="bg-white text-salmon-700 px-10 py-5 rounded-full font-bold hover:bg-salmon-50 transition-all inline-block">
             Contact Us
