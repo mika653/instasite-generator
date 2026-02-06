@@ -9,7 +9,7 @@ const PreviewBanner = () => {
       <span className="text-stone-300">This is a preview of your InstaSite</span>
       <span className="text-stone-500">|</span>
       <a
-        href="https://dfbdigital.com"
+        href="https://www.dfbdigital.com/instasite"
         target="_blank"
         rel="noopener noreferrer"
         className="font-semibold text-salmon-400 hover:text-salmon-300 transition-colors"
