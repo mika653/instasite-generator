@@ -4,12 +4,25 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 interface GeneratorData {
   name: string;
   photoUrl: string | null;
+  profession: string;
+  practiceName: string;
+  phone: string;
+  city: string;
   isSubmitted: boolean;
+}
+
+interface SubmitFields {
+  name: string;
+  photoFile: File | null;
+  profession: string;
+  practiceName: string;
+  phone: string;
+  city: string;
 }
 
 interface GeneratorContextType {
   data: GeneratorData;
-  submitForm: (name: string, photoFile: File | null) => void;
+  submitForm: (fields: SubmitFields) => void;
   resetForm: () => void;
 }
 
@@ -19,19 +32,31 @@ export const GeneratorProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [data, setData] = useState<GeneratorData>({
     name: '',
     photoUrl: null,
+    profession: '',
+    practiceName: '',
+    phone: '',
+    city: '',
     isSubmitted: false,
   });
 
-  const submitForm = useCallback((name: string, photoFile: File | null) => {
-    const photoUrl = photoFile ? URL.createObjectURL(photoFile) : null;
-    setData({ name, photoUrl, isSubmitted: true });
+  const submitForm = useCallback((fields: SubmitFields) => {
+    const photoUrl = fields.photoFile ? URL.createObjectURL(fields.photoFile) : null;
+    setData({
+      name: fields.name,
+      photoUrl,
+      profession: fields.profession,
+      practiceName: fields.practiceName,
+      phone: fields.phone,
+      city: fields.city,
+      isSubmitted: true,
+    });
   }, []);
 
   const resetForm = useCallback(() => {
     if (data.photoUrl) {
       URL.revokeObjectURL(data.photoUrl);
     }
-    setData({ name: '', photoUrl: null, isSubmitted: false });
+    setData({ name: '', photoUrl: null, profession: '', practiceName: '', phone: '', city: '', isSubmitted: false });
   }, [data.photoUrl]);
 
   return (

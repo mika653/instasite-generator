@@ -9,6 +9,10 @@ import { useGenerator } from '../context/GeneratorContext';
 const Home = () => {
   const { data } = useGenerator();
   const heroImage = data.photoUrl || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800';
+  const profession = data.profession || 'internal medicine';
+  const cityLabel = data.city || 'Metro Manila';
+  const practiceName = data.practiceName || CLINIC_INFO.name;
+  const phoneNumber = data.phone || CLINIC_INFO.phone;
 
   return (
     <div className="pb-20">
@@ -19,10 +23,10 @@ const Home = () => {
             <div>
               <ModularBadge label="Hero Section Module" />
               <h1 className="text-4xl lg:text-7xl font-bold text-stone-900 leading-[1.1] mb-6">
-                Trusted medical care, built on <span className="italic serif">compassion</span>.
+                Trusted {profession.toLowerCase()}, built on <span className="italic serif">compassion</span>.
               </h1>
               <p className="text-lg text-stone-500 mb-10 leading-relaxed max-w-xl">
-                {data.name} provides patient-centric internal medicine in Metro Manila.
+                {data.name} provides patient-centric {profession.toLowerCase()} in {cityLabel}.
                 Professional care you can trust.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -58,7 +62,7 @@ const Home = () => {
       {/* SERVICES LIST */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ModularBadge label="Services Module" />
-        <h2 className="text-4xl font-bold mb-12">Medical Services</h2>
+        <h2 className="text-4xl font-bold mb-12">Services</h2>
         <div className="space-y-8">
           {SERVICES.map((service) => (
             <div key={service.id} className="flex gap-6 items-start p-6 rounded-2xl hover:bg-stone-50 transition-all">
@@ -80,7 +84,7 @@ const Home = () => {
           <ModularBadge label="Clinic Info Module" />
           <h2 className="text-4xl font-bold mb-12">Visit Our Clinic</h2>
           <div className="bg-white rounded-3xl p-10 luxury-shadow border border-stone-100 max-w-2xl">
-            <h3 className="serif text-2xl font-bold mb-8 text-stone-900">{CLINIC_INFO.name}</h3>
+            <h3 className="serif text-2xl font-bold mb-8 text-stone-900">{practiceName}</h3>
             <div className="space-y-6">
               <div className="flex gap-4">
                 <div className="bg-salmon-50 p-2 rounded-lg h-fit text-salmon-400">
@@ -88,7 +92,7 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm uppercase tracking-wider text-stone-400 mb-1">Location</h4>
-                  <p className="text-stone-800 font-medium">{CLINIC_INFO.address}</p>
+                  <p className="text-stone-800 font-medium">{data.city ? `${data.city}, Philippines` : CLINIC_INFO.address}</p>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -106,7 +110,7 @@ const Home = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-sm uppercase tracking-wider text-stone-400 mb-1">Phone</h4>
-                  <p className="text-stone-800 font-medium">{CLINIC_INFO.phone}</p>
+                  <p className="text-stone-800 font-medium">{phoneNumber}</p>
                 </div>
               </div>
             </div>
@@ -119,10 +123,10 @@ const Home = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl lg:text-5xl font-bold mb-8">Ready to book your visit?</h2>
           <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-            Get in touch with our clinic today. We're here to help with your healthcare needs.
+            Get in touch with our clinic today. We're here to help with your needs.
           </p>
           <Link to="/contact" className="bg-white text-salmon-700 px-10 py-5 rounded-full font-bold hover:bg-salmon-50 transition-all inline-block">
-            Contact the Clinic
+            Contact Us
           </Link>
         </div>
       </section>

@@ -3,10 +3,16 @@ import React, { useState } from 'react';
 import { User, Mail, Phone, MessageSquare, MapPin, Clock, CheckCircle } from 'lucide-react';
 import { ModularBadge } from '../components/ModularBadge';
 import { CLINIC_INFO } from '../constants';
+import { useGenerator } from '../context/GeneratorContext';
 
 const Contact = () => {
+  const { data } = useGenerator();
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
+
+  const practiceName = data.practiceName || CLINIC_INFO.name;
+  const phoneNumber = data.phone || CLINIC_INFO.phone;
+  const address = data.city ? `${data.city}, Philippines` : CLINIC_INFO.address;
 
   if (submitted) {
     return (
@@ -83,13 +89,14 @@ const Contact = () => {
         </div>
 
         <div className="space-y-8">
+          <h3 className="font-bold text-stone-900">{practiceName}</h3>
           <div className="flex gap-4">
             <div className="bg-salmon-50 p-2 rounded-lg h-fit text-salmon-400">
               <MapPin size={20} />
             </div>
             <div>
               <h4 className="font-semibold text-sm uppercase tracking-wider text-stone-400 mb-1">Address</h4>
-              <p className="text-stone-800 font-medium text-sm">{CLINIC_INFO.address}</p>
+              <p className="text-stone-800 font-medium text-sm">{address}</p>
             </div>
           </div>
           <div className="flex gap-4">
@@ -98,7 +105,7 @@ const Contact = () => {
             </div>
             <div>
               <h4 className="font-semibold text-sm uppercase tracking-wider text-stone-400 mb-1">Phone</h4>
-              <p className="text-stone-800 font-medium text-sm">{CLINIC_INFO.phone}</p>
+              <p className="text-stone-800 font-medium text-sm">{phoneNumber}</p>
             </div>
           </div>
           <div className="flex gap-4">

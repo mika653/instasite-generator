@@ -82,12 +82,13 @@ const Navbar = () => {
 
 const Footer = () => {
   const { data } = useGenerator();
+  const profession = data.profession || 'Professional Services';
 
   return (
     <footer className="bg-stone-50 border-t border-stone-200 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="serif text-xl font-bold mb-2">{data.name}</h2>
-        <p className="text-stone-400 text-sm mb-6">Professional Services</p>
+        <p className="text-stone-400 text-sm mb-6">{profession}</p>
         <div className="flex justify-center gap-4 mb-6">
           <span className="text-[11px] font-bold text-stone-400 border border-stone-300 px-2 py-1 rounded">InstaSite™ Starter</span>
         </div>

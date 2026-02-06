@@ -6,7 +6,6 @@ import { useGenerator } from '../context/GeneratorContext';
 const extractShortName = (fullName: string) => {
   const parts = fullName.split(' ');
   if (parts.length <= 2) return fullName;
-  // Keep title (Dr.) + last name, or first + last
   if (parts[0].endsWith('.')) {
     return `${parts[0]} ${parts[parts.length - 1]}`;
   }
@@ -16,6 +15,7 @@ const extractShortName = (fullName: string) => {
 const About = () => {
   const { data } = useGenerator();
   const shortName = extractShortName(data.name);
+  const profession = data.profession || 'professional services';
 
   return (
     <div className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,7 +23,7 @@ const About = () => {
       <h1 className="text-3xl sm:text-5xl font-bold mb-10">About {shortName}</h1>
       <div className="prose prose-stone lg:prose-xl">
         <p className="text-xl text-stone-600 leading-relaxed mb-8">
-          {data.name} is a dedicated professional committed to providing exceptional service and care.
+          {data.name} is a dedicated {profession.toLowerCase()} professional committed to providing exceptional service and care.
           With years of experience and a passion for excellence, {shortName} brings a client-first
           approach to every interaction.
         </p>
