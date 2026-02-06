@@ -45,8 +45,8 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="relative hidden lg:block">
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden luxury-shadow">
+            <div className="relative">
+              <div className="aspect-[3/4] sm:aspect-[4/5] rounded-3xl overflow-hidden luxury-shadow max-w-sm mx-auto lg:max-w-none">
                 <img
                   src={heroImage}
                   alt={data.name}

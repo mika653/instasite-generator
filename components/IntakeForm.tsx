@@ -18,7 +18,9 @@ const IntakeForm = () => {
     const file = e.target.files?.[0];
     if (file) {
       setPhotoFile(file);
-      setPhotoPreview(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onload = () => setPhotoPreview(reader.result as string);
+      reader.readAsDataURL(file);
     }
   };
 

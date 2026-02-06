@@ -40,24 +40,36 @@ export const GeneratorProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   });
 
   const submitForm = useCallback((fields: SubmitFields) => {
-    const photoUrl = fields.photoFile ? URL.createObjectURL(fields.photoFile) : null;
-    setData({
-      name: fields.name,
-      photoUrl,
-      profession: fields.profession,
-      practiceName: fields.practiceName,
-      phone: fields.phone,
-      city: fields.city,
-      isSubmitted: true,
-    });
+    if (fields.photoFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setData({
+          name: fields.name,
+          photoUrl: reader.result as string,
+          profession: fields.profession,
+          practiceName: fields.practiceName,
+          phone: fields.phone,
+          city: fields.city,
+          isSubmitted: true,
+        });
+      };
+      reader.readAsDataURL(fields.photoFile);
+    } else {
+      setData({
+        name: fields.name,
+        photoUrl: null,
+        profession: fields.profession,
+        practiceName: fields.practiceName,
+        phone: fields.phone,
+        city: fields.city,
+        isSubmitted: true,
+      });
+    }
   }, []);
 
   const resetForm = useCallback(() => {
-    if (data.photoUrl) {
-      URL.revokeObjectURL(data.photoUrl);
-    }
     setData({ name: '', photoUrl: null, profession: '', practiceName: '', phone: '', city: '', isSubmitted: false });
-  }, [data.photoUrl]);
+  }, []);
 
   return (
     <GeneratorContext.Provider value={{ data, submitForm, resetForm }}>
