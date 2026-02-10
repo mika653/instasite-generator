@@ -18,35 +18,35 @@ const Home = () => {
   return (
     <div className="pb-20">
       {/* HERO SECTION */}
-      <section className="relative bg-stone-50 overflow-hidden py-16 lg:py-28">
+      <section className="relative bg-stone-50 overflow-hidden py-10 sm:py-16 lg:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-[1fr_auto] sm:grid-cols-2 gap-4 sm:gap-8 lg:gap-20 items-center">
             <div>
               <ModularBadge label="Hero Section Module" />
-              <h1 className="text-4xl lg:text-7xl font-bold text-stone-900 leading-[1.1] mb-6">
+              <h1 className="text-2xl sm:text-4xl lg:text-7xl font-bold text-stone-900 leading-[1.1] mb-3 sm:mb-6">
                 {copy.heroHeadline} <span className="italic serif">{copy.heroValue}</span>.
               </h1>
-              <p className="text-lg text-stone-500 mb-10 leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-lg text-stone-500 mb-4 sm:mb-10 leading-relaxed max-w-xl">
                 {copy.heroDescription(data.name, cityLabel)}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                 <Link
                   to="/contact"
-                  className="bg-salmon-500 text-white px-8 py-4 rounded-full font-medium hover:bg-salmon-600 transition-all text-center flex items-center justify-center gap-2 group"
+                  className="bg-salmon-500 text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium hover:bg-salmon-600 transition-all text-center flex items-center justify-center gap-2 group"
                 >
                   Get in Touch
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform hidden sm:block" />
                 </Link>
                 <Link
                   to="/about"
-                  className="bg-white text-stone-900 border border-stone-200 px-8 py-4 rounded-full font-medium hover:bg-stone-50 transition-all text-center"
+                  className="bg-white text-stone-900 border border-stone-200 px-5 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium hover:bg-stone-50 transition-all text-center"
                 >
                   Learn More
                 </Link>
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[3/4] sm:aspect-[4/5] rounded-3xl overflow-hidden luxury-shadow max-w-sm mx-auto lg:max-w-none">
+              <div className="w-28 sm:w-auto aspect-[3/4] sm:aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden luxury-shadow sm:max-w-sm sm:mx-auto lg:max-w-none">
                 <img
                   src={heroImage}
                   alt={data.name}
